@@ -1,28 +1,34 @@
 'use client';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import UserInformation from './user-information';
 
 export default function Component({ children }) {
   const { data: session, status } = useSession();
+
   if (status === 'loading') return <p>loading...</p>;
+
   if (session) {
     return (
       <>
-        Signed in as {session.user.email} <br />
+        <p>Signed in as {session?.user?.email}</p>
         <button
-          className="bg-black text-white font-extrabold px-4 py-2 uppercase hover:bg-white hover:text-black "
+          className="bg-black text-white font-extrabold px-4 py-2 uppercase hover:bg-white hover:text-black"
           onClick={() => signOut()}>
           Sign out
         </button>
+        <br />
         {children}
       </>
     );
   }
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <p>Not signed in</p>
+      <button
+        className="bg-black text-white font-extrabold px-4 py-2 uppercase hover:bg-white hover:text-black"
+        onClick={() => signIn()}>
+        Sign in
+      </button>
     </>
   );
 }

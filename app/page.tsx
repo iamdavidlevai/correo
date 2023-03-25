@@ -7,7 +7,11 @@ export default function Page() {
       <h1>Next.js app using Google API</h1>
       <div>
         <LoginBtn>
-          <Link href="/messages">Go to messages</Link>
+          <Link
+            className="bg-black text-white font-extrabold px-4 py-2 uppercase hover:bg-white hover:text-black"
+            href="/messages">
+            Go to messages
+          </Link>
         </LoginBtn>
       </div>
     </div>

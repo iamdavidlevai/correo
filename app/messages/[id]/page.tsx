@@ -2,9 +2,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../../pages/api/auth/[...nextauth]';
 import SingleMessagePage from './single-message-page';
 
-async function getMessage(session, id) {
+async function getMessage(session: any, id: string) {
   if (!session) {
-    res.status(401).json({ error: 'Unauthorized' });
+    // Unauthorized
     return;
   }
 

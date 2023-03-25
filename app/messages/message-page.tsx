@@ -6,18 +6,16 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function MessagePage({ messages }) {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/');
     }
   }, [status, router]);
-  if (status === 'loading') return <div>Loading...</div>;
 
-  console.log('messages');
-  console.log(messages);
-  console.log('messages end');
+  if (status === 'loading') return <div>Loading...</div>;
 
   return (
     <div>
