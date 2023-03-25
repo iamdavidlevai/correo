@@ -14,13 +14,16 @@ async function getMessage(session: any, id: string) {
   try {
     const response = await fetch(url);
     const data = await response.json();
+    if (data.error) {
+      return data.error;
+    }
     return data;
   } catch (error) {
     return error.message;
   }
 }
 
-export default async function SingleMessage({ params: { id } }) {
+export default async function SingleMessage({ id }: { id: string }) {
   const session = await getServerSession(authOptions);
   const message = await getMessage(session, id);
 

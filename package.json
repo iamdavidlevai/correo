@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.16",
     "mailparser": "^3.6.4",
     "next": "13.2.4",
     "next-auth": "^4.20.1",
