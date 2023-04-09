@@ -119,13 +119,13 @@ export default function MessagePage({ messages }) {
                 className="relative bg-white py-5 px-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 hover:bg-gray-50">
                 <div className="flex justify-between space-x-3">
                   <div className="min-w-0 flex-1">
-                    <a href="#" className="block focus:outline-none">
+                    <Link href={`/messages/${message.id}`} className="block focus:outline-none">
                       <>
                         <span className="absolute inset-0" aria-hidden="true" />
                         <p className="truncate text-sm font-medium text-gray-900">{message.sender}</p>
                         <p className="truncate text-sm text-gray-500">{message.subject}</p>
                       </>
-                    </a>
+                    </Link>
                   </div>
                   <time dateTime={message.date} className="flex-shrink-0 whitespace-nowrap text-sm text-gray-500">
                     {message.date}

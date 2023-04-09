@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../../pages/api/auth/[...nextauth]';
+import { authOptions } from '../../../../pages/api/auth/[...nextauth]';
 import SingleMessagePage from './single-message-page';
+import { PageProps } from '../../../../.next/types/app/page';
 
 async function getMessage(session: any, id: string) {
   if (!session) {
@@ -15,17 +16,23 @@ async function getMessage(session: any, id: string) {
     const response = await fetch(url);
     const data = await response.json();
     if (data.error) {
+      console.log('ERROR');
+      console.log(data.error);
       return data.error;
     }
     return data;
   } catch (error) {
+    console.log('ERROR');
+    console.log(error);
     return error.message;
   }
 }
 
-export default async function SingleMessage({ id }: { id: string }) {
+export default async function SingleMessage({ params }: PageProps) {
   const session = await getServerSession(authOptions);
-  const message = await getMessage(session, id);
+  console.log('params');
+  console.log(params);
+  const message = await getMessage(session, params?.id);
 
   return <SingleMessagePage message={message} />;
 }

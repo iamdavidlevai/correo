@@ -48,11 +48,20 @@ const navigation = [
 ];
 const userNavigation = [{ name: 'Your Profile', href: '#' }];
 
+const sidebarNavigation = [
+  { name: 'Open', href: '#', icon: InboxIcon, current: true },
+  // { name: 'Archive', href: '#', icon: ArchiveBoxIconOutline, current: false },
+  // { name: 'Customers', href: '#', icon: UserCircleIcon, current: false },
+  // { name: 'Flagged', href: '#', icon: FlagIcon, current: false },
+  { name: 'Spam', href: '#', icon: NoSymbolIcon, current: false },
+  { name: 'Drafts', href: '#', icon: PencilSquareIcon, current: false },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function InboxLayout({ children }: { children: React.ReactNode }) {
+export default function InboxLayout({ children, list, message }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -330,7 +339,29 @@ export default function InboxLayout({ children }: { children: React.ReactNode })
           </Transition.Root>
         </header>
 
-        <main className="min-w-0 flex-1 border-t border-gray-200 xl:flex">{children}</main>
+        <main className="min-w-0 flex-1 border-t border-gray-200 xl:flex">
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            {/* Narrow sidebar*/}
+            <nav aria-label="Sidebar" className="hidden lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gray-800">
+              <div className="relative flex w-20 flex-col space-y-3 p-3">
+                {sidebarNavigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      item.current ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700',
+                      'inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg'
+                    )}>
+                    <span className="sr-only">{item.name}</span>
+                    <item.icon className="h-6 w-6" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            </nav>
+            {list}
+            {message}
+          </div>
+        </main>
       </div>
     </>
   );

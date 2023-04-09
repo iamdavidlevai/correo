@@ -35,6 +35,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+const base64UrlToBase64 = (input: string): string => {
+  return input.replace('-', '+').replace('_', '/');
+};
+
 function Email({ message }) {
   // Parse the message using mailparser
   const [parsed, setParsed] = useState(null);
@@ -42,7 +46,7 @@ function Email({ message }) {
   useEffect(() => {
     const parseMessage = async () => {
       // Decode the base64url string
-      const decoded = Buffer.from(message.raw, 'base64').toString('ascii');
+      const decoded = Buffer.from(base64UrlToBase64(message.raw), 'base64').toString('ascii');
 
       const promise = simpleParser(decoded);
       const parsed = await promise;

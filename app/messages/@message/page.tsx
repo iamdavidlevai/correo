@@ -14,5 +14,5 @@ import {
 export default async function Messages() {
   console.log('page');
 
-  return null;
+  return <p>Messageshelo</p>;
 }
